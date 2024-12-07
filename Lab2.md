@@ -31,6 +31,9 @@ Ensure the following are available before starting the lab:
 
 If these files are unavailable, refer to the dataset generation instructions provided in the exercises.
 
+
+Download the Lab's Notebook at <a href="https://github.com/osekoo/hands-on-bigdata/blob/develop/Lab2_Student.ipynb">Lab2_Student.ipynb</a>
+
 ---
 
 ## **Exercise 1: Word Count**
