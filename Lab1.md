@@ -17,7 +17,7 @@ The key focus will be on:
 
 These exercises will help you appreciate the power of tools like MapReduce, Spark, and Hadoop while also providing a clear understanding of their underlying principles.
 
-Download the Lab's Notebook at <a href="https://github.com/osekoo/hands-on-bigdata/blob/develop/M2_BigData_Lab1_Student.ipynb">M2_BigData_Lab1_Student.ipynb</a>
+Download the Lab's Notebook at <a href="https://github.com/osekoo/hands-on-bigdata/blob/develop/Lab1_Student.ipynb">Lab1_Student.ipynb</a>
 
 ---
 
