@@ -1,4 +1,4 @@
-# **Lab: Introduction to Big Data Processing**
+# **Lab 1: Introduction to Big Data Processing**
 
 ## **Introduction**
 
