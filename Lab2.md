@@ -27,7 +27,7 @@ Ensure the following are available before starting the lab:
 2. **Dataset files**:
    - `text_data.txt`: A text file containing multiple lines of text.
    - `group_data.txt`: A file with `(k, v)` pairs, where `k` is a key and `v` is a value.
-   - `sort_data.txt`: A file with random integers.
+   - `search_data.txt`: A file with random integers.
 
 If these files are unavailable, refer to the dataset generation instructions provided in the exercises.
 
@@ -106,10 +106,10 @@ Sort a dataset of integers in ascending order using PySpark's distributed transf
 ### **Instructions**
 
 1. **Generate the Dataset**:
-   - If `sort_data.txt` is unavailable, generate a file containing 100,000 random integers between 1 and 1,000,000. Save one integer per line.
+   - If `search_data.txt` is unavailable, generate a file containing 100,000 random integers between 1 and 1,000,000. Save one integer per line.
 
 2. **Load the Dataset**:
-   - Use the file `sort_data.txt`.
+   - Use the file `search_data.txt`.
 
 3. **Transform the Data**:
    - Parse each line into an integer.
