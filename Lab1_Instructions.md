@@ -77,7 +77,7 @@ Perform grouping and aggregation on a sorted dataset by key, simulating how sort
 
 ### **Implementation Details**
 
-#### **Dataset Generation with Sorted \( k \)**
+1. **Dataset Generation with Sorted \( k \)**
 - To control the distribution of \( k \), you can use a weighted random choice. For example:
   - \( k = 1, 2 \): Appear 50% of the time.
   - \( k = 3, 4, 5 \): Appear 30% of the time.
@@ -85,21 +85,15 @@ Perform grouping and aggregation on a sorted dataset by key, simulating how sort
 
 - After generating the dataset, sort it by \( k \) before saving.
 
-#### **Iterators for File Access**
+2. **Iterators for File Access**
 - Wrap the dataset file in an iterator to process it line by line, simulating streaming access.
 - This hides the complexity of file handling and ensures memory efficiency, especially for large datasets.
 
-#### **Grouping via Iteration**
+3. **Grouping via Iteration**
 - Since the file is sorted by \( k \), you can group values without random access:
   1. Read the file line by line.
   2. Accumulate values for the current key \( k \).
   3. When \( k \) changes, save the results for the previous key and start accumulating for the new key.
-
-#### **Performance Comparison**
-- Measure execution time for:
-  1. **Naive Grouping**: Reads and groups an unsorted file by scanning and aggregating in memory.
-  2. **Iterator-based Grouping**: Processes the sorted file line by line using the grouping-by-iteration method.
-
 ---
 
 ### **Key Takeaways**
