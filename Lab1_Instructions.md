@@ -54,47 +54,30 @@ Understand how partitioning reduces the search space and mimics the approach use
 
 Perform grouping and aggregation on a sorted dataset by key, simulating how sorting helps optimize grouping operations in big data systems.
 
----
 
 ### **Instructions**
 
 1. **Dataset Generation**:
    - Generate a dataset of `(k, v)` pairs, where:
      - \( k \): A controlled integer between 1 and 7, generated with a skewed distribution (e.g., some keys are more frequent than others).
+     - To control the distribution of \( k \), you can use a weighted random choice. For example:
+        - \( k = 1, 2 \): Appear 50% of the time.
+        - \( k = 3, 4, 5 \): Appear 30% of the time.
+        - \( k = 6, 7 \): Appear 20% of the time.
      - \( v \): A random integer between 1 and 1,000.
    - Save the dataset in a **sorted order by \( k \)** to a file named `group_sorted_data.txt`.
 
 2. **Iterator-based File Access**:
    - Use Python iterators to simulate streaming access to the dataset file, hiding direct file handling from the processing logic.
+   - Wrap the dataset file in an iterator to process it line by line, simulating streaming access.
+   - This hides the complexity of file handling and ensures memory efficiency, especially for large datasets.
 
 3. **Grouping via Iteration**:
    - Implement a function to iterate through the sorted dataset, grouping values by \( k \) as they appear. This avoids random access and simulates how sorting simplifies grouping in distributed systems.
-
-4. **Comparison with Naive Grouping**:
-   - Compare the performance of the iterator-based grouping on the sorted file against the naive grouping on an unsorted dataset.
-
----
-
-### **Implementation Details**
-
-1. **Dataset Generation with Sorted \( k \)**
-- To control the distribution of \( k \), you can use a weighted random choice. For example:
-  - \( k = 1, 2 \): Appear 50% of the time.
-  - \( k = 3, 4, 5 \): Appear 30% of the time.
-  - \( k = 6, 7 \): Appear 20% of the time.
-
-- After generating the dataset, sort it by \( k \) before saving.
-
-2. **Iterators for File Access**
-- Wrap the dataset file in an iterator to process it line by line, simulating streaming access.
-- This hides the complexity of file handling and ensures memory efficiency, especially for large datasets.
-
-3. **Grouping via Iteration**
-- Since the file is sorted by \( k \), you can group values without random access:
-  1. Read the file line by line.
-  2. Accumulate values for the current key \( k \).
-  3. When \( k \) changes, save the results for the previous key and start accumulating for the new key.
----
+   - Since the file is sorted by \( k \), you can group values without random access:
+     1. Read the file line by line.
+     2. Accumulate values for the current key \( k \).
+     3. When \( k \) changes, save the results for the previous key and start accumulating for the new key.
 
 ### **Key Takeaways**
 1. Sorting the dataset by \( k \) beforehand simplifies grouping, reducing memory usage and computation overhead.
