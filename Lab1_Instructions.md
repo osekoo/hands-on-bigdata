@@ -30,14 +30,15 @@ Efficiently search for integers in a large dataset using both naive and optimize
 ### **Instructions**
 
 1. **Dataset Generation**:
-   - Sequentially generate and save into a file named `search_data.txt` a collection of 900,000 random integers between 1 and 1,000,000. Store one integer per line.
+   - Sequentially generate and save into a file named `search_data.txt` a collection of 900,000 random integers between 1 and 1,000,000.
+   - Store one integer per line.
 
 2. **Linear Search**:
    - Implement a naive function that sequentially scans the file for 5 user-provided integers.
    - Output `YES` if the integer exists in the dataset or `NO` otherwise.
 
 3. **Partitioned Search**:
-   - Partition the dataset into `m = 1,000` smaller files based on a hash function (e.g., \( H(n) = n \% m \)).
+   - Partition the dataset into `m = 1,000` smaller files based on a hash function (e.g., `H(n) = n % m `).
    - Implement a partitioned search that reads only the relevant partition file for each user-provided integer.
 
 4. **Compare Performance**:
@@ -58,17 +59,17 @@ Perform grouping and aggregation on large datasets stored on disk, simulating op
 ### **Instructions**
 
 1. **Dataset Generation**:
-   - Generate a collection \( C \) of 30,000,000 `(k, v)` pairs, where:
-     - \( k \) is a random integer between 1 and 7.
-     - \( v \) is a random integer between 1 and 1,000.
-   - Save the dataset to a file named `group_data.txt`, with each line formatted as `k, v`.
+   - Sequentially generate and save into a file named `group_data.txt` a collection of 30,000,000 `(k, v)` pairs, where:
+     - `k` is a random integer between 1 and 7.
+     - `v` is a random integer between 1 and 1,000.
+   - With each line formatted as `k, v`.
 
 2. **Naive Grouping**:
-   - Implement a function that reads the file sequentially and computes the sum of \( v \) values for each \( k \) without advanced data structures.
-   - Output the aggregated result as a list of tuples \((k, \text{sum}_v)\).
+   - Implement a function that reads the file sequentially and computes the sum of `v` values for each `k` without advanced data structures.
+   - Output the aggregated result as a list of tuples (k, $\sum_{(k,v)} v$).
 
 3. **Partitioned Grouping**:
-   - Partition the dataset into \( m = 10 \) smaller files using a hash function (e.g., \( H(k) = k \% m \)).
+   - Partition the dataset into `m = 10` smaller files using a hash function (e.g., `H(k) = k \% m`).
    - Implement a partitioned grouping function that processes each partition file sequentially.
    - Combine results from all partitions into a single output.
 
@@ -91,14 +92,10 @@ Perform grouping and aggregation on a sorted dataset by key, simulating how sort
 ### **Instructions**
 
 1. **Dataset Generation**:
-   - Generate a dataset of `(k, v)` pairs, where:
-     - \( k \): A controlled integer between 1 and 7, generated with a skewed distribution (e.g., some keys are more frequent than others).
-     - \( v \): A random integer between 1 and 1,000.
-   - To control the distribution of \( k \), you can use a weighted random choice. For example:
-     - \( k = 1, 2 \): Appear 50% of the time.
-     - \( k = 3, 4, 5 \): Appear 30% of the time.
-     - \( k = 6, 7 \): Appear 20% of the time.
-   - Save the dataset in a **sorted order by \( k \)** to a file named `group_sorted_data.txt`.
+   - Generate a dataset of  a collection of 30,000,000 `(k, v)` pairs, where:
+     - `k`: A controlled integer between 1 and 7.
+     - `v`: A random integer between 1 and 1,000.
+   - Save the dataset in a **sorted order by `k`** to a file named `group_sorted_data.txt`.
 
 2. **Iterator-based File Access**:
    - Use Python iterators to simulate streaming access to the dataset file, hiding direct file handling from the processing logic.
@@ -106,25 +103,19 @@ Perform grouping and aggregation on a sorted dataset by key, simulating how sort
    - This hides the complexity of file handling and ensures memory efficiency, especially for large datasets.
 
 3. **Grouping via Iteration**:
-   - Implement a function to iterate through the sorted dataset, grouping values by \( k \) as they appear. This avoids random access and simulates how sorting simplifies grouping in distributed systems.
-   - Since the file is sorted by \( k \), you can group values without random access:
+   - Implement a function to iterate through the sorted dataset, grouping values by `k `as they appear. This avoids random access and simulates how sorting simplifies grouping in distributed systems.
+   - Since the file is sorted by `k`, you can group values without random access:
      1. Read the file line by line.
-     2. Accumulate values for the current key \( k \).
-     3. When \( k \) changes, save the results for the previous key and start accumulating for the new key.
+     2. Accumulate values for the current key `k`.
+     3. When `k `changes, save the results for the previous key and start accumulating for the new key.
 
-4. **Comparison with Naive Grouping**:
+4. **Comparison**:
    - Compare the performance of the iterator-based grouping on the sorted file against the naive grouping on an unsorted dataset.
 
-#### **Performance Comparison**
-- Measure execution time for:
-  1. **Naive Grouping**: Reads and groups an unsorted file by scanning and aggregating in memory.
-  2. **Iterator-based Grouping**: Processes the sorted file line by line using the grouping-by-iteration method.
-
-
 ### **Key Takeaways**
-1. Sorting the dataset by \( k \) beforehand simplifies grouping, reducing memory usage and computation overhead.
+1. Sorting the dataset by `k `beforehand simplifies grouping, reducing memory usage and computation overhead.
 2. Iterators enable efficient file processing without loading the entire dataset into memory.
-3. Skewed distributions for \( k \) simulate real-world scenarios where data isn't uniformly distributed, offering better insights into optimization techniques.
+3. Skewed distributions for `k `simulate real-world scenarios where data isn't uniformly distributed, offering better insights into optimization techniques.
 
 ---
 
@@ -137,7 +128,7 @@ Merge multiple sorted datasets into a single sorted output using techniques foun
 ### **Instructions**
 
 1. **Dataset Generation**:
-   - Generate \( n = 3 \) sorted lists of random integers:
+   - Generate `n = 3 `sorted lists of random integers:
      - List 1: 10 integers between 1 and 100.
      - List 2: 10 integers between 50 and 150.
      - List 3: 10 integers between 100 and 200.
@@ -170,10 +161,10 @@ Count word occurrences in a large text dataset, simulating a MapReduce-style wor
 
 2. **Sequential Word Count**:
    - Implement a naive function that reads the file line by line and counts the occurrences of each word.
-   - Store the results as a list of tuples \((\text{word}, \text{count})\).
+   - Store the results as a list of tuples $(\text{word}, \text{count})$.
 
 3. **Partitioned Word Count**:
-   - Partition the text file into smaller files based on a hash function (e.g., \( H(\text{word}) = \sum (\text{ord}(c) \text{ for } c \text{ in } \text{word}) \% m \)).
+   - Partition the text file into smaller files based on a hash function (e.g., $H(\text{word}) = \sum \text{ord}(c) \text{ for } c \text{ in } \text{word} \% m$).
    - Implement a function to process each partition sequentially and combine the results.
 
 
