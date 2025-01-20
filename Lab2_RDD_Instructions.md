@@ -1,4 +1,4 @@
-# **Lab Session: Algorithms and Programming with Spark RDDs in Colab**  
+# **Lab Session: Algorithms and Programming with Spark RDDs using PySpark**  
 
 ## Introduction
 This lab session introduces you to foundational concepts of distributed data processing using Spark's Resilient Distributed Datasets (RDDs). You'll leverage Python and the PySpark library within the Colab environment to build, execute, and analyze various Spark programs. The session covers:
@@ -40,58 +40,29 @@ By the end of this session, you'll have hands-on experience in using Spark for s
      ```
 
 3. **Transform and Process**:
-   - Tokenize the lines into words:
-     ```python
-     words = document.flatMap(lambda line: line.split())
-     ```
-   - Map each word to a key-value pair:
-     ```python
-     word_pairs = words.map(lambda word: (word, 1))
-     ```
-   - Reduce by key to count occurrences:
-     ```python
-     word_counts = word_pairs.reduceByKey(lambda x, y: x + y)
-     ```
+   - Tokenize the lines into words
+   - Map each word to a key-value pair
+   - Reduce by key to count occurrence
 
 4. **View Results**:
-   - Display the word counts:
-     ```python
-     print(word_counts.collect())
-     ```
+   - Display the word counts
 
 
 ## **Exercise 2: Data Aggregation**
 **Objective**: Compute the average quantity of each pet from a dataset and analyze shuffle operations.
 
 1. **Setup**:  
-   - Create an RDD for the dataset. For example:
-     ```python
-     data = [("dog", 3), ("cat", 4), ("dog", 5), ("cat", 6)]
-     pets = sc.parallelize(data)
-     ```
+   - Create an RDD for the dataset. For example
 
 2. **Aggregate Data**:
-   - Calculate the total quantity and count for each pet:
-     ```python
-     totals = pets.mapValues(lambda qty: (qty, 1)).reduceByKey(
-         lambda x, y: (x[0] + y[0], x[1] + y[1])
-     )
-     ```
-   - Compute the average:
-     ```python
-     averages = totals.mapValues(lambda x: x[0] / x[1])
-     ```
+   - Calculate the total quantity and count for each pet
+   - Compute the average
 
 3. **Optimize Shuffle**:
-   - Discuss with the class how to reduce shuffle operations, e.g., using `combineByKey`.
+   - How to reduce shuffle operations?.
 
 4. **View Results**:
-   - Print the averages:
-     ```python
-     print(averages.collect())
-     ```
-
----
+   - Print the averages.
 
 ## **Exercise 3: Join Operations**
 **Objective**: Perform equi-joins and right-outer joins without the `join()` transformation.
@@ -104,12 +75,7 @@ By the end of this session, you'll have hands-on experience in using Spark for s
      ```
 
 2. **Equi-Join Implementation**:
-   - Perform a cartesian product and filter:
-     ```python
-     equi_join = rdd1.cartesian(rdd2).filter(lambda x: x[0][0] == x[1][0]).map(
-         lambda x: (x[0][0], (x[0][1], x[1][1]))
-     )
-     ```
+   - Perform a cartesian product and filter.
 
 3. **Right-Outer Join**:
    - Extend the equi-join logic to include keys exclusive to `rdd2`.
@@ -117,7 +83,6 @@ By the end of this session, you'll have hands-on experience in using Spark for s
 4. **Discuss Results**:
    - Compare performance with the standard `join()` transformation.
 
----
 
 ## **Exercise 4: Encoding SQL Queries in Spark**
 **Objective**: Encode SQL-like queries using Python MapReduce and test them.
@@ -135,35 +100,13 @@ By the end of this session, you'll have hands-on experience in using Spark for s
      ```
 
 2. **Query 1: Customers with Orders in July**:
-   - Filter customers by month:
-     ```python
-     from datetime import datetime
-     july_customers = customer_rdd.filter(
-         lambda x: datetime.strptime(x[1], "%Y-%m-%d").month == 7
-     ).map(lambda x: x[2])
-     print(july_customers.collect())
-     ```
+   - Filter customers by month.
 
 3. **Query 2: Distinct Names**:
-   - Use `distinct()`:
-     ```python
-     distinct_names = july_customers.distinct()
-     print(distinct_names.collect())
-     ```
+   - Use `distinct()`.
 
 4. **Query 3: Aggregated Orders**:
-   - Perform grouping and aggregation:
-     ```python
-     grouped_orders = order_rdd.map(lambda x: (x[0], float(x[1]))).groupByKey()
-     aggregated = grouped_orders.mapValues(
-         lambda x: (sum(x), len(set(x)))
-     )
-     print(aggregated.collect())
-     ```
+   - Perform grouping and aggregation.
 
 5. **Query 4: Join Customers and Orders**:
-   - Use a key-based join:
-     ```python
-     join_result = customer_rdd.map(lambda x: (x[0], x[2])).join(order_rdd.map(lambda x: (x[0], x[1])))
-     print(join_result.collect())
-     ```
+   - Use a key-based join.
